@@ -1,0 +1,26 @@
+/* About Page Styles */
+.about-page {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.tech-stack {
+  margin-top: 30px;
+  text-align: left;
+}
+
+.tech-stack h3 {
+  color: #00ff41;
+  margin-bottom: 15px;
+}
+
+.tech-stack ul {
+  color: #cccccc;
+  padding-left: 20px;
+}
+
+.tech-stack li {
+  margin-bottom: 8px;
+  line-height: 1.5;
+}

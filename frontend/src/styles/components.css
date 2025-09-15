@@ -1,0 +1,56 @@
+/* Common component styles */
+
+/* Language selector styles */
+.language-selector-inline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.language-selector-inline label {
+  color: var(--color-textSecondary);
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.compact-select {
+  background: var(--color-inputBackground);
+  border: 1px solid var(--color-inputBorder);
+  color: var(--color-inputText);
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
+  font-size: 0.9rem;
+  transition: border-color 0.3s ease;
+}
+
+.compact-select:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+/* Common card styles */
+.compact-card {
+  background: var(--color-cardBackground);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  box-shadow: var(--color-boxShadow);
+  padding: 25px;
+  margin: 20px 0;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.card-header h2 {
+  margin: 0;
+  color: var(--color-accent);
+  font-size: 1.5rem;
+}

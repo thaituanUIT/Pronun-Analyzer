@@ -1,0 +1,77 @@
+/* CSS Variables for theming */
+:root {
+  /* Default (Dark) theme variables - will be overridden by ThemeContext */
+  --color-background: #0a0a0a;
+  --color-cardBackground: #1a1a1a;
+  --color-navBackground: #1a1a1a;
+  
+  --color-textPrimary: #ffffff;
+  --color-textSecondary: #cccccc;
+  --color-textMuted: #999999;
+  
+  --color-accent: #00ff41;
+  --color-accentHover: #00cc33;
+  
+  --color-border: #333333;
+  --color-borderHover: #555555;
+  
+  --color-buttonPrimary: #00ff41;
+  --color-buttonPrimaryHover: #00cc33;
+  --color-buttonSecondary: #2a2a2a;
+  --color-buttonSecondaryHover: #3a3a3a;
+  
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
+  
+  --color-inputBackground: #2a2a2a;
+  --color-inputBorder: #555555;
+  --color-inputText: #ffffff;
+  
+  --color-shadow: rgba(0,0,0,0.5);
+  --color-boxShadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+/* Global base styles */
+body {
+  margin: 0;
+  font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--color-background);
+  min-height: 100vh;
+  color: var(--color-textPrimary);
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+code {
+  font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
+  background: var(--color-cardBackground);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--color-accent);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Common utility classes */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.card {
+  background: var(--color-cardBackground);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  box-shadow: var(--color-boxShadow);
+  padding: 30px;
+  margin: 20px 0;
+  backdrop-filter: blur(10px);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}

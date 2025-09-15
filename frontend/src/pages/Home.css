@@ -1,0 +1,107 @@
+/* Home Page Styles */
+.home-page {
+  padding: 40px 20px;
+}
+
+.hero-section {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+  color: var(--color-textPrimary);
+  font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
+  text-shadow: 0 0 20px rgba(var(--color-accent), 0.3);
+  transition: color 0.3s ease;
+}
+
+.hero-subtitle {
+  font-size: 1.3rem;
+  color: var(--color-textSecondary);
+  margin-bottom: 50px;
+  line-height: 1.6;
+  transition: color 0.3s ease;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin: 50px 0;
+}
+
+.feature-card {
+  background: var(--color-cardBackground);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 30px 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  border-color: var(--color-accent);
+  box-shadow: 0 4px 20px rgba(var(--color-accent), 0.1);
+  transform: translateY(-5px);
+}
+
+.feature-icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.feature-card h3 {
+  color: var(--color-accent);
+  margin: 0 0 15px 0;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.feature-card p {
+  color: var(--color-textSecondary);
+  line-height: 1.6;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.cta-section {
+  margin-top: 50px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cta-button {
+  background: var(--color-buttonPrimary);
+  color: var(--color-background);
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 150px;
+}
+
+.cta-button:hover {
+  background: var(--color-buttonPrimaryHover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(var(--color-accent), 0.3);
+}
+
+.cta-button.secondary {
+  background: transparent;
+  color: var(--color-accent);
+  border: 2px solid var(--color-accent);
+}
+
+.cta-button.secondary:hover {
+  background: var(--color-accent);
+  color: var(--color-background);
+}

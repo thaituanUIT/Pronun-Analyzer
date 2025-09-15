@@ -1,0 +1,9 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "Running tests before push..."
+
+# Run tests with coverage
+npm run test:coverage
+
+echo "Tests passed! Ready to push."

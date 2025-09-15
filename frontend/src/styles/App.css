@@ -1,0 +1,17 @@
+/* App component styles */
+.App {
+  text-align: center;
+  padding: 0;
+  min-height: 100vh;
+  font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
+  background: var(--color-background);
+  color: var(--color-textPrimary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Main content with top margin for fixed nav */
+.main-content {
+  margin-top: 60px;
+  min-height: calc(100vh - 60px);
+  padding: 20px;
+}

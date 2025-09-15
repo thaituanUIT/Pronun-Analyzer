@@ -1,0 +1,110 @@
+/* Language Settings Styles */
+.language-settings {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.language-settings.compact {
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
+
+.language-settings-label {
+  color: var(--color-textSecondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.language-settings.compact .language-settings-label {
+  margin-bottom: 0;
+  white-space: nowrap;
+}
+
+.language-settings-control {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 250px;
+}
+
+.language-settings.compact .language-settings-control {
+  width: auto;
+  min-width: 180px;
+}
+
+.language-settings-select {
+  width: 100%;
+  background: var(--color-inputBackground);
+  border: 2px solid var(--color-inputBorder);
+  color: var(--color-inputText);
+  padding: 12px 40px 12px 16px;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  appearance: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.language-settings-select:hover {
+  border-color: var(--color-borderHover);
+}
+
+.language-settings-select:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px rgba(var(--color-accent), 0.2);
+}
+
+.language-settings-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 16px;
+  opacity: 0.7;
+}
+
+.language-settings-description {
+  color: var(--color-textMuted);
+  font-size: 0.8rem;
+  margin: 4px 0 0 0;
+  line-height: 1.4;
+}
+
+/* Custom dropdown arrow */
+.language-settings-select::after {
+  content: '▼';
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--color-textMuted);
+  font-size: 12px;
+}
+
+/* Option styling */
+.language-settings-select option {
+  background: var(--color-inputBackground);
+  color: var(--color-inputText);
+  padding: 8px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .language-settings.compact {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .language-settings-control {
+    width: 100%;
+    max-width: none;
+  }
+}

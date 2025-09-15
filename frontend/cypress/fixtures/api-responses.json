@@ -1,0 +1,81 @@
+{
+  "transcriptionResponse": {
+    "job_id": "test-job-123",
+    "status": "processing"
+  },
+  "completedJobResponse": {
+    "status": "completed",
+    "result": {
+      "transcription": "The quick brown fox jumps over the lazy dog",
+      "pronunciation_analysis": {
+        "words": [
+          {
+            "word": "The",
+            "pronunciation_accuracy": 0.95,
+            "is_mispronounced": false,
+            "phonemes": ["ð", "ə"]
+          },
+          {
+            "word": "quick",
+            "pronunciation_accuracy": 0.88,
+            "is_mispronounced": false,
+            "phonemes": ["k", "w", "ɪ", "k"]
+          },
+          {
+            "word": "brown",
+            "pronunciation_accuracy": 0.92,
+            "is_mispronounced": false,
+            "phonemes": ["b", "r", "aʊ", "n"]
+          },
+          {
+            "word": "fox",
+            "pronunciation_accuracy": 0.65,
+            "is_mispronounced": true,
+            "phonemes": ["f", "ɑ", "k", "s"]
+          },
+          {
+            "word": "jumps",
+            "pronunciation_accuracy": 0.78,
+            "is_mispronounced": false,
+            "phonemes": ["dʒ", "ʌ", "m", "p", "s"]
+          },
+          {
+            "word": "over",
+            "pronunciation_accuracy": 0.85,
+            "is_mispronounced": false,
+            "phonemes": ["oʊ", "v", "ər"]
+          },
+          {
+            "word": "the",
+            "pronunciation_accuracy": 0.90,
+            "is_mispronounced": false,
+            "phonemes": ["ð", "ə"]
+          },
+          {
+            "word": "lazy",
+            "pronunciation_accuracy": 0.55,
+            "is_mispronounced": true,
+            "phonemes": ["l", "eɪ", "z", "i"]
+          },
+          {
+            "word": "dog",
+            "pronunciation_accuracy": 0.95,
+            "is_mispronounced": false,
+            "phonemes": ["d", "ɔ", "g"]
+          }
+        ],
+        "overall_accuracy": 0.82,
+        "fluency_score": 0.78,
+        "pace_score": 0.85
+      }
+    }
+  },
+  "errorResponse": {
+    "error": "Failed to process audio file",
+    "details": "Unsupported audio format"
+  },
+  "apiErrorResponse": {
+    "error": "Internal server error",
+    "status": 500
+  }
+}

@@ -1,0 +1,243 @@
+/* Pronunciation Results Styles */
+.pronunciation-results {
+  background: #1e1e1e;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 15px 0;
+  color: #ffffff;
+}
+
+.pronunciation-results h3 {
+  color: #00ff41;
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+.pronunciation-results h4 {
+  color: #cccccc;
+  margin: 15px 0 10px 0;
+  font-size: 1.1rem;
+}
+
+/* Horizontal Score Layout */
+.score-overview-horizontal {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.score-card-horizontal {
+  background: #2a2a2a;
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 15px;
+  text-align: center;
+  flex: 1;
+  min-width: 120px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.score-card-horizontal:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 255, 65, 0.2);
+}
+
+.score-label {
+  color: #cccccc;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.score-value-large {
+  font-size: 2rem;
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+}
+
+/* Analysis Summary */
+.analysis-summary {
+  background: #252525;
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.summary-item {
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.transcript {
+  color: #88cc88;
+  font-style: italic;
+}
+
+.summary-stats {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.stat-item {
+  background: #333;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: #cccccc;
+}
+
+/* Error Words Container */
+.error-words-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+/* Individual Error Word Boxes */
+.error-word-box {
+  background: #2a2a2a;
+  border: 2px solid #444;
+  border-radius: 8px;
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  min-width: 150px;
+  max-width: 200px;
+}
+
+.error-word-box:hover {
+  border-color: #00ff41;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 255, 65, 0.3);
+  background: #333;
+}
+
+.error-word {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #ff6b6b;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.error-type-badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  text-align: center;
+  width: 100%;
+}
+
+/* Error type colors */
+.error-type-badge[data-type="substitution"] {
+  background: #e74c3c;
+  color: white;
+}
+
+.error-type-badge[data-type="deletion"] {
+  background: #e67e22;
+  color: white;
+}
+
+.error-type-badge[data-type="insertion"] {
+  background: #f39c12;
+  color: white;
+}
+
+.error-type-badge[data-type="stress"] {
+  background: #9b59b6;
+  color: white;
+}
+
+.error-type-badge[data-type="errors"] {
+  background: #8e44ad;
+  color: white;
+}
+
+.error-details {
+  font-size: 0.85rem;
+  color: #cccccc;
+  line-height: 1.3;
+}
+
+.error-details div {
+  margin-bottom: 4px;
+}
+
+.error-tip {
+  color: #88cc88 !important;
+  font-style: italic;
+  margin-top: 6px;
+}
+
+/* No Errors State */
+.no-errors {
+  text-align: center;
+  background: #2a4a2a;
+  border: 2px solid #4a8a4a;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 15px 0;
+}
+
+.no-errors h4 {
+  color: #66cc66;
+  margin-bottom: 10px;
+}
+
+.no-errors p {
+  color: #aaccaa;
+}
+
+/* Phonetic Transcript */
+.phonetic-section {
+  background: #252525;
+  border-radius: 6px;
+  padding: 15px;
+  margin-top: 20px;
+}
+
+.phonetic-transcript {
+  background: #1a1a1a;
+  border: 1px solid #444;
+  border-radius: 4px;
+  padding: 12px;
+  font-family: 'Courier New', monospace;
+  color: #cccccc;
+  word-wrap: break-word;
+  line-height: 1.4;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .score-overview-horizontal {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .error-words-container {
+    justify-content: center;
+  }
+  
+  .error-word-box {
+    min-width: 140px;
+    max-width: 100%;
+  }
+  
+  .summary-stats {
+    flex-direction: column;
+    gap: 8px;
+  }
+}

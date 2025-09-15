@@ -1,0 +1,79 @@
+/* Language Selector Component Styles */
+.language-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 15px 0;
+}
+
+.language-selector label {
+  color: #cccccc;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.language-selector select {
+  background: #2a2a2a;
+  border: 1px solid #555555;
+  color: #ffffff;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.language-selector select:focus {
+  outline: none;
+  border-color: #00ff41;
+  box-shadow: 0 0 0 2px rgba(0, 255, 65, 0.2);
+}
+
+.language-selector select:hover {
+  border-color: #777777;
+}
+
+.language-selector select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Inline version for compact layouts */
+.language-selector-inline {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.language-selector-inline label {
+  color: #cccccc;
+  font-size: 0.85rem;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.language-selector-inline .compact-select {
+  background: #2a2a2a;
+  border: 1px solid #555555;
+  color: #ffffff;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-family: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 120px;
+}
+
+.language-selector-inline .compact-select:focus {
+  outline: none;
+  border-color: #00ff41;
+  box-shadow: 0 0 0 2px rgba(0, 255, 65, 0.2);
+}
+
+.language-selector-inline .compact-select:hover {
+  border-color: #777777;
+}

@@ -1,0 +1,153 @@
+/* Theme Toggle Styles */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.theme-toggle.compact {
+  gap: 8px;
+}
+
+.theme-toggle-label {
+  color: var(--color-textSecondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.theme-toggle-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.theme-toggle-button:focus {
+  box-shadow: 0 0 0 2px var(--color-accent);
+}
+
+.theme-toggle-track {
+  width: 52px;
+  height: 28px;
+  background: var(--color-inputBackground);
+  border: 2px solid var(--color-border);
+  border-radius: 14px;
+  position: relative;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.theme-toggle-button:hover .theme-toggle-track {
+  border-color: var(--color-borderHover);
+  transform: scale(1.05);
+}
+
+.theme-toggle-thumb {
+  width: 22px;
+  height: 22px;
+  background: var(--color-accent);
+  border-radius: 50%;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.theme-toggle-button.light .theme-toggle-thumb {
+  transform: translateX(24px);
+  background: var(--color-accent);
+}
+
+.theme-icon {
+  font-size: 12px;
+  line-height: 1;
+  filter: brightness(0) invert(1);
+}
+
+.theme-toggle-button.light .theme-icon {
+  filter: brightness(0) invert(0);
+}
+
+/* Make sun icon yellow in light mode */
+.theme-toggle-button.light .theme-icon {
+  filter: brightness(100%);
+}
+
+.theme-toggle-text {
+  color: var(--color-textPrimary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  min-width: 40px;
+}
+
+.theme-toggle-current {
+  color: var(--color-textSecondary);
+  font-size: 0.85rem;
+}
+
+/* Size variations */
+.theme-toggle.small .theme-toggle-track {
+  width: 40px;
+  height: 22px;
+  border-radius: 11px;
+}
+
+.theme-toggle.small .theme-toggle-thumb {
+  width: 18px;
+  height: 18px;
+}
+
+.theme-toggle.small.light .theme-toggle-thumb {
+  transform: translateX(18px);
+}
+
+.theme-toggle.small .theme-icon {
+  font-size: 10px;
+}
+
+.theme-toggle.large .theme-toggle-track {
+  width: 64px;
+  height: 34px;
+  border-radius: 17px;
+}
+
+.theme-toggle.large .theme-toggle-thumb {
+  width: 28px;
+  height: 28px;
+  top: 1px;
+  left: 1px;
+}
+
+.theme-toggle.large.light .theme-toggle-thumb {
+  transform: translateX(30px);
+}
+
+.theme-toggle.large .theme-icon {
+  font-size: 14px;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle-track,
+  .theme-toggle-thumb {
+    transition: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .theme-toggle-track {
+    border-width: 3px;
+  }
+}
