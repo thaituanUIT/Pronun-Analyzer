@@ -1,13 +1,5 @@
-from fastapi import FastAPI
-from backend.routers.transcription_router import router as transcription_router
-from backend.routers.pronunciation_router import router as pronunciation_router
-from backend.routers.tts_router import router as tts_router
+import uvicorn
+from backend.app import app
 
-app = FastAPI(title="Speech-to-Text API", description="Whisper-based speech transcription service")
-
-# Register routers
-app.include_router(transcription_router)
-app.include_router(pronunciation_router)
-app.include_router(tts_router)
-
-# Optionally, add health and root endpoints here or import from a separate router
+if __name__ == "__main__":
+    uvicorn.run("backend.main:app", host="0.0.0.0", port=8000, reload=True)
