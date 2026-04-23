@@ -127,3 +127,6 @@ transformers_cache/
 # GPU specific
 *.cu
 *.cuh
+
+frontend/package-lock.json
+frontend/node_modules
