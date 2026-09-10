@@ -28,7 +28,7 @@ services:
         sync: false
 
   - type: web
-    name: croissant-web
+    name: croissant
     runtime: static
     rootDir: frontend
     buildCommand: npm install && npm run build
