@@ -4,13 +4,9 @@ services:
     runtime: docker
     dockerfilePath: ./backend/Dockerfile
     dockerContext: .
-    plan: 0.5c-512mb
+    plan: free
     region: oregon
     healthCheckPath: /health
-    disk:
-      name: croissant-api-data
-      mountPath: /app/data
-      sizeGB: 1
     envVars:
       - key: ENVIRONMENT
         value: production
@@ -19,7 +15,7 @@ services:
       - key: CACHE_DIR
         value: /app/.cache
       - key: JOB_STATE_DB
-        value: /app/data/jobs.sqlite3
+        value: /tmp/croissant/jobs.sqlite3
       - key: STT_PROVIDER
         value: freeai
       - key: PUBLIC_BASE_URL
