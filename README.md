@@ -11,15 +11,16 @@ A robust, modular, and AI-powered speech analysis application. Croissant uses Op
 
 ## 🚀 Key Features
 
-- **🧠 Advanced Pronunciation Analysis**: Get detailed feedback on accuracy, fluency, and overall score compared to reference text.
+- **🧠 Pronunciation Analysis**: Get accuracy, fluency, acoustic signal metrics, and overall score compared to reference text.
 - **🎙️ Seamless Recording**: Record high-quality audio directly from your browser.
 - **📁 Multi-Format Support**: Upload files in MP3, WAV, M4A, FLAC, OGG, or WebM formats.
 - **🌍 10+ Languages**: Support for English, German, Spanish, French, Italian, Portuguese, Russian, Japanese, Korean, and Chinese.
+- **💾 Persistent Job State**: Background job status survives backend restarts through SQLite-backed storage.
 - **⚡ Optimized Backend**: 
     - **Single-Model Architecture**: Whisper model is shared across services to minimize VRAM usage.
     - **Modular Design**: Clean separation of concerns (Routers -> APIs -> Logic -> Services).
     - **Async Processing**: High-performance asynchronous job handling with real-time status updates.
-- **🐳 Docker Ready**: Deploy anywhere with pre-configured containerization.
+- **🐳 Docker Compose Support**: Run the frontend and backend together with persistent volumes.
 
 ---
 
@@ -49,17 +50,16 @@ backend/
 - **Python 3.8+**
 - **FFmpeg** (Required for audio processing)
 - **Node.js 16+** (For frontend)
-- **Docker** (Optional, for simplified deployment)
+- **Docker** (Optional, for Compose deployment)
 
 ### 2. Manual Installation
 
 #### Backend
 ```bash
-cd backend
 python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
-pip install -r requirements.txt
-uvicorn main:app --reload
+pip install -r backend/requirements.txt
+uvicorn backend.main:app --reload
 ```
 
 #### Frontend
@@ -69,11 +69,15 @@ npm install
 npm start
 ```
 
-### 3. Docker Deployment (Recommended)
+### 3. Docker Deployment
 
 ```bash
-docker-compose up --build
+docker compose up --build
 ```
+
+The frontend runs at [http://localhost:3000](http://localhost:3000), and the
+backend API runs at [http://localhost:8000](http://localhost:8000). Compose keeps
+model cache, uploads, and SQLite job state in named volumes.
 
 ---
 
@@ -100,7 +104,16 @@ Copy `.env.development` or `.env.production` to `.env` in the `backend` folder t
 
 - `ENVIRONMENT`: `development` or `production`
 - `FORCE_CPU`: Set to `true` to disable GPU acceleration (VRAM limited).
-- `ALLOWED_ORIGINS`: Comma-separated list for CORS management.
+- `CORS_ORIGINS`: Comma-separated list for CORS management.
+- `JOB_STATE_DB`: SQLite path for persistent job status storage.
+- `STT_PROVIDER`: Use `local` for bundled Whisper or `freeai` for Free.ai hosted STT.
+- `PUBLIC_BASE_URL`: Public backend URL required by Free.ai so it can fetch uploaded audio.
+- `FREE_AI_API_KEY`: Free.ai API key. Required when `STT_PROVIDER=freeai`.
+- `FREE_AI_STT_MODEL`: Free.ai STT model name. Defaults to `whisper`.
+
+Free.ai STT uses `POST /v1/stt/transcribe/` with an audio URL, so local
+development requires `STT_PROVIDER=local` unless your backend is exposed through
+a public tunnel.
 
 ---
 

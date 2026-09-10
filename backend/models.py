@@ -29,11 +29,14 @@ class PronunciationAnalysis(BaseModel):
     overall_score: float  # 0-100
     accuracy_score: float
     fluency_score: float
+    acoustic_score: Optional[float] = None
     pronunciation_errors: List[PronunciationError]
     transcript: str
     phonetic_transcript: str
     words_analyzed: int
     total_errors: int
+    acoustic_features: Optional[Dict[str, float]] = None
+    analysis_method: Optional[str] = None
 
 class PronunciationStatus(BaseModel):
     job_id: str

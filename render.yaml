@@ -1,0 +1,42 @@
+services:
+  - type: web
+    name: croissant-api
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: .
+    plan: 0.5c-512mb
+    region: oregon
+    healthCheckPath: /health
+    disk:
+      name: croissant-api-data
+      mountPath: /app/data
+      sizeGB: 1
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      - key: FORCE_CPU
+        value: "true"
+      - key: CACHE_DIR
+        value: /app/.cache
+      - key: JOB_STATE_DB
+        value: /app/data/jobs.sqlite3
+      - key: STT_PROVIDER
+        value: freeai
+      - key: PUBLIC_BASE_URL
+        value: https://croissant-api.onrender.com
+      - key: FREE_AI_STT_MODEL
+        value: whisper
+      - key: CORS_ORIGINS
+        value: https://croissant-web.onrender.com,http://localhost:3000
+      - key: FREE_AI_API_KEY
+        sync: false
+
+  - type: web
+    name: croissant-web
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: build
+    envVars:
+      - key: REACT_APP_API_BASE_URL
+        value: https://croissant-api.onrender.com

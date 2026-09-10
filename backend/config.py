@@ -10,6 +10,12 @@ FORCE_CPU = os.getenv("FORCE_CPU", "false").lower() == "true"
 ENVIRONMENT = os.getenv("ENVIRONMENT", "development")
 MODEL_ID = "openai/whisper-small"
 CACHE_DIR = os.getenv("CACHE_DIR", "/app/.cache")
+JOB_STATE_DB = os.getenv("JOB_STATE_DB", os.path.abspath(os.path.join(os.getcwd(), "data", "jobs.sqlite3")))
+STT_PROVIDER = os.getenv("STT_PROVIDER", "local").lower()
+PUBLIC_BASE_URL = os.getenv("PUBLIC_BASE_URL", "").rstrip("/")
+FREE_AI_API_KEY = os.getenv("FREE_AI_API_KEY")
+FREE_AI_BASE_URL = os.getenv("FREE_AI_BASE_URL", "https://api.free.ai").rstrip("/")
+FREE_AI_STT_MODEL = os.getenv("FREE_AI_STT_MODEL", "whisper")
 
 if FORCE_CPU:
     DEVICE = torch.device("cpu")

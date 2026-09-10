@@ -1,6 +1,8 @@
-from fastapi import FastAPI
+import os
+from fastapi import FastAPI, HTTPException
+from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
-from backend.config import ALLOWED_ORIGINS, ENVIRONMENT, logger
+from backend.config import ALLOWED_ORIGINS, ENVIRONMENT, STT_PROVIDER, logger
 from backend.routers import transcription_router, pronunciation_router, tts_router
 from backend.core.model_manager import model_manager
 
@@ -26,6 +28,10 @@ app.include_router(tts_router.router, tags=["TTS"])
 @app.on_event("startup")
 async def startup_event():
     logger.info("Initializing application...")
+    if STT_PROVIDER != "local":
+        logger.info(f"Skipping local model load because STT_PROVIDER={STT_PROVIDER}")
+        return
+
     # Optionally load models on startup if RAM allows
     # In a production environment with auto-scaling, we might load on first request
     # but here we'll trigger it to ensure we're ready
@@ -38,9 +44,22 @@ async def startup_event():
 async def health_check():
     return {
         "status": "healthy",
+        "stt_provider": STT_PROVIDER,
         "models_loaded": model_manager.model is not None,
         "environment": ENVIRONMENT
     }
+
+@app.get("/uploaded-audio/{filename}")
+async def get_uploaded_audio(filename: str):
+    safe_name = os.path.basename(filename)
+    if safe_name != filename:
+        raise HTTPException(status_code=404, detail="Audio file not found")
+
+    file_path = os.path.join("uploads", safe_name)
+    if not os.path.exists(file_path):
+        raise HTTPException(status_code=404, detail="Audio file not found")
+
+    return FileResponse(file_path)
 
 # Logic for deleting jobs can be added here or in a separate router
 @app.delete("/job/{job_id}")
@@ -56,4 +75,4 @@ async def delete_job(job_id: str):
     
     if deleted:
         return {"message": "Job deleted successfully"}
-    return {"error": "Job not found"}, 404
+    raise HTTPException(status_code=404, detail="Job not found")

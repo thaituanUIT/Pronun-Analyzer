@@ -12,10 +12,19 @@ function PronunciationResults({ analysis, language }) {
 
   const renderErrorWords = () => {
     if (!analysis.pronunciation_errors || analysis.pronunciation_errors.length === 0) {
+      const hasLowAcousticScore =
+        analysis.acoustic_score !== null
+        && analysis.acoustic_score !== undefined
+        && analysis.acoustic_score < 70;
+
       return (
         <div className="no-errors">
-          <h4>Excellent Pronunciation!</h4>
-          <p>No significant pronunciation errors detected. Keep up the great work!</p>
+          <h4>{hasLowAcousticScore ? 'No Word-Level Errors Detected' : 'Excellent Pronunciation!'}</h4>
+          <p>
+            {hasLowAcousticScore
+              ? 'Word alignment looks correct, but pacing, pauses, or audio clarity affected the acoustic score.'
+              : 'No significant pronunciation errors detected. Keep up the great work!'}
+          </p>
         </div>
       );
     }
@@ -82,6 +91,17 @@ function PronunciationResults({ analysis, language }) {
             {Math.round(analysis.fluency_score || 0)}%
           </div>
         </div>
+        {analysis.acoustic_score !== null && analysis.acoustic_score !== undefined && (
+          <div className="score-card-horizontal">
+            <div className="score-label">Acoustic</div>
+            <div
+              className="score-value-large"
+              style={{ color: getScoreColor(analysis.acoustic_score) }}
+            >
+              {Math.round(analysis.acoustic_score || 0)}%
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Analysis Summary */}
@@ -92,6 +112,13 @@ function PronunciationResults({ analysis, language }) {
         <div className="summary-stats">
           <span className="stat-item">{analysis.words_analyzed || 0} words analyzed</span>
           <span className="stat-item">{analysis.total_errors || 0} errors found</span>
+          {analysis.acoustic_features && (
+            <>
+              <span className="stat-item">{analysis.acoustic_features.speech_rate_wpm || 0} wpm</span>
+              <span className="stat-item">{Math.round((analysis.acoustic_features.silence_ratio || 0) * 100)}% silence</span>
+              <span className="stat-item">{analysis.acoustic_features.pause_count || 0} pauses</span>
+            </>
+          )}
         </div>
       </div>
 

@@ -1,0 +1,8 @@
+node_modules
+build
+coverage
+cypress/videos
+cypress/screenshots
+.env
+.env.*
+npm-debug.log*

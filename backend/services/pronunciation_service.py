@@ -2,14 +2,13 @@ import os
 import uuid
 import logging
 from fastapi import BackgroundTasks, UploadFile
-from backend.config import logger
+from backend.config import DEVICE, logger
 from backend.state import pronunciation_jobs
 from backend.core.model_manager import model_manager
 from backend.logic.pronunciation import PronunciationAnalyzer
 
 async def analyze_pronunciation_background(job_id: str, file_path: str, reference_text: str, language: str):
     """Background task for pronunciation analysis"""
-    converted_path = None
     try:
         pronunciation_jobs[job_id]["status"] = "processing"
         pronunciation_jobs[job_id]["progress"] = 20
@@ -18,33 +17,12 @@ async def analyze_pronunciation_background(job_id: str, file_path: str, referenc
         model_manager.load_models()
         
         # Initialize analyzer with shared model
-        analyzer = PronunciationAnalyzer(model_manager.processor, model_manager.model)
+        analyzer = PronunciationAnalyzer(model_manager.processor, model_manager.model, DEVICE)
         pronunciation_jobs[job_id]["progress"] = 50
         
         analysis = await analyzer.analyze_pronunciation(file_path, reference_text, language)
         
-        # Convert to dictionary for JSON serialization
-        analysis_dict = {
-            "overall_score": analysis.overall_score,
-            "accuracy_score": analysis.accuracy_score,
-            "fluency_score": analysis.fluency_score,
-            "transcript": analysis.transcript,
-            "phonetic_transcript": analysis.phonetic_transcript,
-            "words_analyzed": analysis.words_analyzed,
-            "total_errors": analysis.total_errors,
-            "pronunciation_errors": [
-                {
-                    "word": error.word,
-                    "expected_pronunciation": error.expected_pronunciation,
-                    "actual_pronunciation": error.actual_pronunciation,
-                    "confidence": error.confidence,
-                    "error_type": error.error_type,
-                    "position": error.position,
-                    "suggestion": error.suggestion
-                }
-                for error in analysis.pronunciation_errors
-            ]
-        }
+        analysis_dict = analysis.model_dump()
         
         pronunciation_jobs[job_id]["analysis"] = analysis_dict
         pronunciation_jobs[job_id]["progress"] = 100

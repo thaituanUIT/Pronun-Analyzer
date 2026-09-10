@@ -104,6 +104,8 @@ coverage/
 
 # Docker
 .dockerignore
+!.dockerignore
+!frontend/.dockerignore
 
 # macOS
 .DS_Store

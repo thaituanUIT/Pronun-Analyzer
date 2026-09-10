@@ -1,5 +1,5 @@
 // API Configuration
-export const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'https://localhost:8000';
+export const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8000';
 
 export const API_ENDPOINTS = {
   transcribe: '/transcribe',
@@ -24,6 +24,13 @@ export const AUDIO_CONFIG = {
   sampleRate: 44100,
   channelCount: 1,
   audioBitsPerSecond: 128000,
+  fallbackMimeType: 'audio/webm',
+  supportedMimeTypes: [
+    'audio/webm;codecs=opus',
+    'audio/webm',
+    'audio/mp4',
+    'audio/wav',
+  ],
   mimeTypes: [
     'audio/webm;codecs=opus',
     'audio/webm',
@@ -90,8 +97,10 @@ export const STATUS_TYPES = {
   LOADING: 'loading',
   SUCCESS: 'success',
   ERROR: 'error',
+  QUEUED: 'queued',
   PROCESSING: 'processing',
   COMPLETED: 'completed',
+  FAILED: 'failed',
   PENDING: 'pending',
 };
 

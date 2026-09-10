@@ -1,0 +1,42 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      ENVIRONMENT: production
+      FORCE_CPU: "true"
+      CACHE_DIR: /app/.cache
+      JOB_STATE_DB: /app/data/jobs.sqlite3
+      STT_PROVIDER: local
+      PUBLIC_BASE_URL: http://localhost:8000
+      FREE_AI_STT_MODEL: whisper
+      CORS_ORIGINS: http://localhost:3000,http://localhost
+    ports:
+      - "8000:8000"
+    volumes:
+      - backend_cache:/app/.cache
+      - backend_data:/app/data
+      - backend_uploads:/app/uploads
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        REACT_APP_API_BASE_URL: http://localhost:8000
+    ports:
+      - "3000:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+
+volumes:
+  backend_cache:
+  backend_data:
+  backend_uploads:

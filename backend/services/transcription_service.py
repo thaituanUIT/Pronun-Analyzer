@@ -6,6 +6,7 @@ from fastapi import BackgroundTasks, UploadFile
 from backend.config import DEVICE, logger
 from backend.state import transcription_jobs
 from backend.core.model_manager import model_manager
+from backend.services.stt_provider import transcribe_with_free_ai, using_hosted_stt
 
 def convert_audio_to_wav(file_path):
     # This should be implemented or imported
@@ -24,6 +25,14 @@ async def transcribe_audio_background(job_id: str, file_path: str, language: str
     converted_path = None
     try:
         transcription_jobs[job_id]["status"] = "processing"
+
+        if using_hosted_stt():
+            transcription_jobs[job_id]["progress"] = 25
+            result = await transcribe_with_free_ai(file_path, language)
+            transcription_jobs[job_id]["transcript"] = result["text"]
+            transcription_jobs[job_id]["progress"] = 100
+            transcription_jobs[job_id]["status"] = "completed"
+            return
         
         # Ensure models are loaded
         model_manager.load_models()
@@ -54,8 +63,13 @@ async def transcribe_audio_background(job_id: str, file_path: str, language: str
         transcription_jobs[job_id]["error"] = str(e)
         logger.error(f"Transcription failed for job {job_id}: {e}")
     finally:
-        if os.path.exists(file_path):
-            os.remove(file_path)
+        for path in (converted_path, file_path):
+            if path and os.path.exists(path):
+                try:
+                    os.remove(path)
+                except OSError as cleanup_error:
+                    logger.warning(f"Failed to remove temporary file {path}: {cleanup_error}")
+
 async def start_transcription_job(background_tasks: BackgroundTasks, file: UploadFile, language: str, task: str):
     """Initialize a transcription job and start background processing"""
     import uuid
