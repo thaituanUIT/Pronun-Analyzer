@@ -34,5 +34,7 @@ services:
     buildCommand: npm install && npm run build
     staticPublishPath: build
     envVars:
+      - key: NODE_VERSION
+        value: 20
       - key: REACT_APP_API_BASE_URL
         value: https://croissant-api.onrender.com
